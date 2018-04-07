@@ -400,7 +400,8 @@ bool Setup::RunPostMessageLoop(const base::CommandLine& cmdline) {
     return false;
   }
 
-  if (!build_settings_.build_args().VerifyAllOverridesUsed(&err)) {
+  if (!build_settings_.build_args().VerifyAllOverridesUsed(&err) ||
+      !Scope::VerifyAllUpdatesUsed(&err)) {
     if (cmdline.HasSwitch(switches::kFailOnUnusedArgs)) {
       err.PrintToStdout();
       return false;
